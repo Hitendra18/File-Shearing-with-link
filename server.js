@@ -1,13 +1,23 @@
 const express = require("express");
 const app = express();
-const connectDB = require("./config/db.js");
 const path = require("path");
-connectDB();
+const cors = require("cors");
 
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static("public"));
 app.use(express.json());
+
+const connectDB = require("./config/db.js");
+connectDB();
+
+// Corse
+const corsOptions = {
+  origin: process.env.ALLOW_CLINTS.split(","),
+  // ["http://localhost:3000" , "https://fileshare-app.onrender.com"]
+};
+
+app.use(cors(corsOptions));
 
 // Tempelate engine
 app.set("views", path.join(__dirname, "/views"));
