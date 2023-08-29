@@ -28,6 +28,10 @@ app.use("/api/files", require("./routs/files.js"));
 app.use("/files", require("./routs/show.js"));
 app.use("/files/download", require("./routs/download.js"));
 
+app.get("/", (req, res) => {
+  res.send("../frontend/index.html");
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
